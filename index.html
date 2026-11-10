@@ -54,16 +54,17 @@
     .zw-profile {
       display: flex;
       flex-direction: column;
-      align-self: start;
-      height: clamp(43.375rem, calc(79.375rem - 53.333vw), 49.375rem);
+      align-self: stretch;
       padding-top: .15rem;
       text-align: right;
     }
 
     .zw-headshot-frame {
-      width: 100%;
+      flex: 0 0 auto;
+      width: min(100%, var(--zw-profile-name-width, 13.84rem));
       aspect-ratio: 4 / 5;
       margin: 0 0 1.55rem;
+      margin-inline-start: auto;
       overflow: hidden;
       border-radius: 2px;
     }
@@ -90,6 +91,11 @@
       font-weight: 600;
       letter-spacing: -.03em;
       line-height: 1.15;
+    }
+
+    .zw-profile-name {
+      display: inline-block;
+      white-space: nowrap;
     }
 
     .zw-position {
@@ -119,7 +125,7 @@
 
     .zw-profile-footer {
       margin-top: auto;
-      padding: 2.35rem 0 .7rem;
+      padding: 2.35rem 0 0;
     }
 
     .zw-copyright {
@@ -302,9 +308,21 @@
       border: 0 !important;
     }
 
-    @media (min-width: 901px) and (hover: none) and (pointer: coarse) {
-      .zw-profile {
-        height: calc(clamp(43.375rem, calc(79.375rem - 53.333vw), 49.375rem) - .75rem);
+    @media (min-width: 901px) {
+      .zw-research {
+        display: flex;
+        flex-direction: column;
+        container-type: inline-size;
+      }
+
+      .zw-bio {
+        font-size: min(1.0625rem, 2.495cqi);
+        text-wrap: balance;
+      }
+
+      .zw-research section + section {
+        margin-top: auto;
+        padding-top: 2.85rem;
       }
     }
 
@@ -317,16 +335,14 @@
 
       .zw-profile {
         align-items: center;
-        height: auto;
         padding-bottom: 2.55rem;
         border-bottom: 1px solid var(--zw-rule);
         text-align: center;
       }
 
       .zw-headshot-frame {
-        width: min(72vw, 270px);
-        margin-right: auto;
-        margin-left: auto;
+        width: min(100%, var(--zw-profile-name-width, 12.55rem));
+        margin-inline: auto;
       }
 
       .zw-home h1 {
@@ -369,7 +385,7 @@
   </style>
 </head>
 <body>
-  <div class="zw-home">
+  <div class="zw-home" id="zw-home">
     <div class="zw-page-shell">
       <aside class="zw-profile" aria-label="About Zichang Wang">
         <div class="zw-headshot-frame">
@@ -377,7 +393,7 @@
         </div>
 
         <header>
-          <h1>Zichang Wang</h1>
+          <h1><span class="zw-profile-name">Zichang Wang</span></h1>
           <p class="zw-position">Assistant Professor<br>Xiamen University</p>
         </header>
 
@@ -461,5 +477,24 @@
       </main>
     </div>
   </div>
+  <script>
+    (() => {
+      const profile = document.getElementById('zw-home')?.querySelector('.zw-profile');
+      const name = profile?.querySelector('.zw-profile-name');
+      if (!name) return;
+
+      function matchPortraitToName() {
+        const width = name.getBoundingClientRect().width;
+        if (width > 0) profile.style.setProperty('--zw-profile-name-width', width + 'px');
+      }
+
+      matchPortraitToName();
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(matchPortraitToName).observe(name);
+      } else {
+        window.addEventListener('resize', matchPortraitToName);
+      }
+    })();
+  </script>
 </body>
 </html>
