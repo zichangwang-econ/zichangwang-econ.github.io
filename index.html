@@ -309,6 +309,11 @@
     }
 
     @media (min-width: 901px) {
+      .zw-page-shell:has(.zw-abstract-details[open]) > .zw-profile-anchored {
+        align-self: start;
+        min-block-size: var(--zw-profile-rest-height);
+      }
+
       .zw-research {
         display: flex;
         flex-direction: column;
@@ -479,20 +484,38 @@
   </div>
   <script>
     (() => {
-      const profile = document.getElementById('zw-home')?.querySelector('.zw-profile');
+      const home = document.getElementById('zw-home');
+      const profile = home?.querySelector('.zw-profile');
       const name = profile?.querySelector('.zw-profile-name');
-      if (!name) return;
+      const research = home?.querySelector('.zw-research');
+      if (!name || !research) return;
+
+      const desktop = window.matchMedia('(min-width: 901px)');
 
       function matchPortraitToName() {
         const width = name.getBoundingClientRect().width;
         if (width > 0) profile.style.setProperty('--zw-profile-name-width', width + 'px');
       }
 
+      function rememberClosedProfileHeight() {
+        if (!desktop.matches || research.querySelector('.zw-abstract-details[open]')) return;
+        const height = profile.getBoundingClientRect().height;
+        if (height <= 0) return;
+        profile.style.setProperty('--zw-profile-rest-height', height + 'px');
+        profile.classList.add('zw-profile-anchored');
+      }
+
       matchPortraitToName();
+      rememberClosedProfileHeight();
       if ('ResizeObserver' in window) {
         new ResizeObserver(matchPortraitToName).observe(name);
+        new ResizeObserver(rememberClosedProfileHeight).observe(profile);
       } else {
-        window.addEventListener('resize', matchPortraitToName);
+        window.addEventListener('resize', () => {
+          matchPortraitToName();
+          rememberClosedProfileHeight();
+        });
+        research.addEventListener('toggle', rememberClosedProfileHeight, true);
       }
     })();
   </script>
