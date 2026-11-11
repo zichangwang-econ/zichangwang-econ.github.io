@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Courses taught by Zichang Wang at Xiamen University and Duke University.">
+  <link rel="canonical" href="https://zichangwang.com/teaching.html">
+  <title>Teaching | Zichang Wang</title>
+  <link rel="stylesheet" href="assets/homepage.css">
+</head>
+<body>
+  <div class="zw-home" id="zw-home">
+    <div class="zw-page-shell">
+      <aside class="zw-profile" aria-label="About Zichang Wang">
+        <div class="zw-headshot-frame">
+          <img class="zw-headshot" src="assets/headshot.webp" alt="Portrait of Zichang Wang" width="1365" height="2048">
+        </div>
+
+        <header>
+          <h1><span class="zw-profile-name">Zichang Wang</span></h1>
+          <p class="zw-position">Assistant Professor<br>Xiamen University</p>
+        </header>
+
+        <address class="zw-email-list">
+          <span>zichang.wang262@gmail.com</span>
+        </address>
+
+        <nav class="zw-profile-links" aria-label="Profile links">
+          <a href="files/Wang-CV-Sep-2026.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+          <a href="./">Research</a>
+          <a href="./teaching.html" aria-current="page">Teaching</a>
+        </nav>
+
+        <footer class="zw-profile-footer">
+          <p class="zw-copyright">© 2026 Zichang Wang</p>
+          <p class="zw-site-credit">Built with ChatGPT · Hosted on GitHub</p>
+        </footer>
+      </aside>
+
+      <main class="zw-research">
+        <p class="zw-bio">Welcome to my website! My research is in economic theory, with an emphasis on decision theory and behavioral economics. I received my PhD from Duke University in 2023.</p>
+
+        <section class="zw-teaching-panel" id="zw-teaching-panel" aria-labelledby="zw-teaching-title">
+          <h2 class="zw-section-title" id="zw-teaching-title">Teaching</h2>
+
+          <article class="zw-paper zw-teaching-group">
+            <h3>At Xiamen University</h3>
+            <ul class="zw-course-list" role="list">
+              <li>Information Economics (<em>Undergraduate</em>) — Spring 2025/2026</li>
+              <li>Financial Economics (<em>Undergraduate</em>) — Spring 2025</li>
+              <li>Advanced Microeconomics II (<em>Master / PhD</em>) — Spring 2026</li>
+              <li>Academic Writing for Graduate Students (<em>Master / PhD</em>) — Spring 2024</li>
+            </ul>
+          </article>
+
+          <article class="zw-paper zw-teaching-group">
+            <h3>At Duke University</h3>
+            <ul class="zw-course-list" role="list">
+              <li>ECON 700: Mathematics for Economists (<em>PhD</em>) — 2020, 2021</li>
+              <li>ECON 205: Intermediate Microeconomics (<em>Undergraduate</em>) — Fall 2020, TA</li>
+              <li>ECON 701/705: Microeconomic Analysis I/II (<em>Master / PhD</em>) — 2018–2019, 2021, TA</li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const profile = document.getElementById('zw-home')?.querySelector('.zw-profile');
+      const name = profile?.querySelector('.zw-profile-name');
+      if (!name) return;
+
+      function matchPortraitToName() {
+        const width = name.getBoundingClientRect().width;
+        if (width > 0) profile.style.setProperty('--zw-profile-name-width', width + 'px');
+      }
+
+      matchPortraitToName();
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(matchPortraitToName).observe(name);
+      } else {
+        window.addEventListener('resize', matchPortraitToName);
+      }
+    })();
+  </script>
+</body>
+</html>
