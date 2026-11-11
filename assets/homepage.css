@@ -429,7 +429,7 @@ body {
   }
 
   .zw-course-list {
-    font-size: clamp(.8125rem, calc(5.1cqi - .92px), 1rem);
+    font-size: clamp(.78125rem, calc(4.82cqi - .87px), 1rem);
     line-height: 1.35;
   }
 
