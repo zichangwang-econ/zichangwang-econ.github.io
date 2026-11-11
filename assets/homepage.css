@@ -313,7 +313,7 @@ body {
   .zw-profile {
     --zw-right-width: min(680px, 100cqi - 270px - var(--zw-column-gap));
     --zw-sidebar-bio-size: min(1.0625rem, calc(var(--zw-right-width) * .02495));
-    /* Collapsed research column minus its two-line bio, shared across both pages. */
+    /* Keep the shared desktop sidebar baseline when the bio text changes. */
     align-self: start;
     min-block-size: calc(39.217rem + 3.3 * var(--zw-sidebar-bio-size));
   }
@@ -325,7 +325,7 @@ body {
   }
 
   .zw-bio {
-    font-size: min(1.0625rem, 2.495cqi);
+    font-size: min(1.0625rem, 2.32cqi);
     text-wrap: balance;
   }
 
@@ -447,5 +447,16 @@ body {
     color: var(--zw-muted);
     font-size: min(.875rem, .95em);
     line-height: 1.4;
+  }
+}
+
+@media (min-width: 677px) and (max-width: 900px) {
+  .zw-research {
+    container-type: inline-size;
+  }
+
+  .zw-bio {
+    font-size: min(1rem, 2.32cqi);
+    text-wrap: balance;
   }
 }
