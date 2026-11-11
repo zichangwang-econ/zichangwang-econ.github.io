@@ -406,6 +406,7 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
+  line-height: 2;
 }
 
 @media (min-width: 901px) {
@@ -419,5 +420,32 @@ body {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+  }
+}
+
+@media (max-width: 900px) {
+  .zw-teaching-panel {
+    container-type: inline-size;
+  }
+
+  .zw-course-list {
+    font-size: clamp(.8125rem, calc(5.1cqi - .92px), 1rem);
+    line-height: 1.35;
+  }
+
+  .zw-course-list li + li {
+    margin-block-start: .75rem;
+  }
+
+  .zw-course-title,
+  .zw-course-details {
+    display: block;
+  }
+
+  .zw-course-details {
+    margin-block-start: .125rem;
+    color: var(--zw-muted);
+    font-size: min(.875rem, .95em);
+    line-height: 1.4;
   }
 }
